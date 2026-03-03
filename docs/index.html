@@ -115,67 +115,69 @@
         <p class="section-intro">Separação clara entre orquestração (Go) e inteligência (Python), comunicando-se via contrato REST versionado. Cada camada é independente, testável e deployável isoladamente.</p>
 
         <div class="arch-diagram">
+          <div class="arch-labels">
+            <span class="arch-label arch-label-bfa">BFA &mdash; Go 1.22 &middot; :8080</span>
+            <span class="arch-label arch-label-agent">AI Agent &mdash; Python 3.11 &middot; :8000</span>
+          </div>
           <button class="zoom-btn" id="zoom-btn" title="Abrir em tela cheia">
-            <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Ampliar
+            <svg viewBox="0 0 24 24" fill="none"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="arch-diagram-inner">
             <pre class="mermaid">
 flowchart TD
-    Client(["Client &middot; App / Web"])
+    Client(["Cliente"])
 
-    Client -- "HTTP" --> BFA_SVC
+    Client -->|HTTP| Router
 
-    subgraph BFA["BFA &mdash; Backend for App &middot; Go 1.22 &middot; :8080"]
+    subgraph BFA[" "]
         direction TB
 
-        subgraph BFA_SVC["Service Layer"]
+        Router["Router / Middleware"]
+        Auth["Auth  JWT + bcrypt"]
+        Banking["Banking  PIX + Cart&atilde;o + Boleto"]
+        Assistant["Assistant  Orchestrator"]
+        ChatV2["Chat v2  Onboarding"]
+
+        subgraph CC["errgroup"]
             direction LR
-            Auth["<b>Auth</b><br/>JWT + bcrypt"]
-            Banking["<b>Banking</b><br/>PIX &middot; Cart&atilde;o &middot; Boleto"]
-            Assistant["<b>Assistant</b><br/>Orchestrator"]
-            ChatV2["<b>Chat v2</b><br/>Onboarding Manager"]
+            Profile["Profile API"]
+            Txn["Transactions API"]
         end
 
-        subgraph BFA_CC["Concurrent Calls &middot; errgroup"]
-            direction LR
-            Profile["<b>Profile API</b><br/>retry + circuit breaker"]
-            Txn["<b>Transactions API</b><br/>retry + circuit breaker"]
-        end
+        Supa[("Supabase  PostgreSQL")]
+        Cache["Cache  TTL 5min"]
+        AgentClient["Agent Client"]
+        ObsBFA["Prometheus + OTel + Zap"]
 
-        Supa[("<b>Supabase</b><br/>PostgreSQL + PostgREST + RLS")]
-        Cache["<b>Cache</b><br/>In-Memory &middot; TTL 5min"]
-        AC["<b>Agent Client</b><br/>retry + circuit breaker"]
-        ObsBFA["<b>Observability</b><br/>Prometheus &middot; OpenTelemetry &middot; Zap &middot; Axiom"]
-
-        Assistant --> BFA_CC
-        ChatV2 --> AC
+        Router --> Auth & Banking & Assistant & ChatV2
+        Assistant --> CC
+        ChatV2 --> AgentClient
         Profile --> Supa
         Txn --> Supa
         Assistant --> Cache
     end
 
-    AC -- "POST /v1/chat" --> Security
+    AgentClient -->|"POST /v1/chat"| Security
 
-    subgraph AGENT["AI Agent &middot; Python 3.11 / FastAPI &middot; :8000"]
+    subgraph AGENT[" "]
         direction TB
 
-        Security["<b>Security Layer</b><br/>Input Sanitization &middot; Injection Detection<br/>PII Masking &middot; Cost Control"]
+        Security["Security Layer"]
 
-        subgraph LG["LangGraph Workflow"]
+        subgraph LG["LangGraph"]
             direction LR
-            Plan["<b>Planner</b><br/>LLM + bind_tools"]
-            Exec["<b>Executor</b><br/>LLM dispatch"]
-            Tools["<b>Tools</b><br/>ToolNode"]
-            Synth["<b>Synthesizer</b><br/>LLM final"]
+            Plan["Planner"]
+            Exec["Executor"]
+            Tools["Tools"]
+            Synth["Synthesizer"]
         end
 
-        RAG["<b>RAG Pipeline</b><br/>Knowledge Base .md &rarr; Chunking 1024 &rarr; Embeddings &rarr; ChromaDB &rarr; Semantic Search"]
-        ObsAg["<b>Observability</b><br/>Prometheus &middot; OpenTelemetry &middot; structlog &middot; LangFuse"]
+        RAG["RAG Pipeline  ChromaDB"]
+        ObsAg["Prometheus + OTel + LangFuse"]
 
         Security --> Plan
         Plan --> Exec --> Tools --> Synth
-        Tools -.->|"should_continue&#40;&#41;"| Plan
+        Tools -.->|"loop"| Plan
     end
             </pre>
           </div>
@@ -715,32 +717,46 @@ SENSITIVE_PATTERNS = {
   <script>
     mermaid.initialize({
       startOnLoad: true,
-      theme: 'dark',
+      theme: 'base',
       themeVariables: {
         darkMode: true,
-        background: '#0c1219',
-        primaryColor: '#1a2332',
-        primaryTextColor: '#cdd6e4',
-        primaryBorderColor: '#2a3546',
-        lineColor: '#4a90d9',
-        secondaryColor: '#131b27',
-        tertiaryColor: '#080c14',
-        fontFamily: 'Inter, sans-serif',
+        background: 'transparent',
+        primaryColor: '#1e293b',
+        primaryTextColor: '#e2e8f0',
+        primaryBorderColor: '#334155',
+        lineColor: '#60a5fa',
+        secondaryColor: '#1e1b4b',
+        tertiaryColor: '#172554',
+        fontFamily: 'Inter, system-ui, sans-serif',
         fontSize: '13px',
-        clusterBkg: '#0c1219',
-        clusterBorder: '#1e2d3d',
-        edgeLabelBackground: '#1a2332',
-        nodeTextColor: '#cdd6e4'
+        clusterBkg: 'rgba(30,41,59,0.45)',
+        clusterBorder: '#475569',
+        edgeLabelBackground: '#1e293b',
+        nodeTextColor: '#e2e8f0',
+        nodeBorder: '#475569',
+        mainBkg: '#1e293b',
+        nodeRadius: 8
       },
       flowchart: {
         useMaxWidth: true,
         htmlLabels: true,
         curve: 'basis',
-        padding: 16,
-        nodeSpacing: 35,
-        rankSpacing: 50
+        padding: 20,
+        nodeSpacing: 45,
+        rankSpacing: 55,
+        diagramPadding: 20
       }
     });
+
+    /* Post-render: style subgraph labels */
+    setTimeout(function() {
+      document.querySelectorAll('.cluster-label .nodeLabel').forEach(function(label) {
+        var text = label.textContent.trim();
+        if (!text || text === ' ') {
+          label.closest('.cluster-label').style.display = 'none';
+        }
+      });
+    }, 800);
   </script>
 </body>
 </html>

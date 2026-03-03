@@ -83,19 +83,20 @@
 
   if (zoomBtn && zoomOverlay && zoomContent) {
 
-    // Find the Mermaid SVG (may take time to render)
     function findSvg() {
       return document.querySelector('.arch-diagram .mermaid svg')
           || document.querySelector('.arch-diagram svg');
     }
 
-    function showZoom(svg) {
+    function openZoom(svg) {
       zoomContent.innerHTML = '';
       var clone = svg.cloneNode(true);
+      // Reset all dimension constraints for fullscreen
       clone.removeAttribute('height');
-      clone.style.maxWidth = 'none';
-      clone.style.width = 'auto';
-      clone.style.minWidth = '1200px';
+      clone.removeAttribute('width');
+      clone.removeAttribute('style');
+      clone.style.width = '100%';
+      clone.style.minWidth = '1100px';
       clone.style.height = 'auto';
       zoomContent.appendChild(clone);
       zoomOverlay.classList.add('active');
@@ -110,20 +111,16 @@
     zoomBtn.addEventListener('click', function () {
       var svg = findSvg();
       if (svg) {
-        showZoom(svg);
+        openZoom(svg);
       } else {
-        // Mermaid hasn't rendered yet — retry after a delay
-        var attempts = 0;
-        var retryInterval = setInterval(function () {
-          attempts++;
+        // Retry in case Mermaid hasn't finished rendering
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
           svg = findSvg();
-          if (svg) {
-            clearInterval(retryInterval);
-            showZoom(svg);
-          } else if (attempts >= 5) {
-            clearInterval(retryInterval);
-          }
-        }, 400);
+          if (svg) { clearInterval(timer); openZoom(svg); }
+          else if (tries >= 6) { clearInterval(timer); }
+        }, 500);
       }
     });
 

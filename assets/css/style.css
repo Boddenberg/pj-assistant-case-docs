@@ -407,17 +407,17 @@ code {
    ARCHITECTURE DIAGRAM + ZOOM
    ═══════════════════════════════════════════════════════════════════ */
 .arch-diagram {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.7) 100%);
+  border: 1px solid rgba(71,85,105,0.35);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: var(--shadow-glow);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
   position: relative;
 }
 
 .arch-diagram-inner {
   overflow-x: auto;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
 }
 
 .arch-diagram .mermaid {
@@ -431,9 +431,55 @@ code {
   height: auto;
 }
 
-.arch-diagram .mermaid .cluster-label { font-weight: 600; }
-.arch-diagram .mermaid .nodeLabel { font-size: 0.78rem; line-height: 1.35; }
+/* Modern node styling */
+.arch-diagram .mermaid .node rect,
+.arch-diagram .mermaid .node polygon,
+.arch-diagram .mermaid .node circle {
+  rx: 10;
+  ry: 10;
+}
+
+.arch-diagram .mermaid .cluster rect {
+  rx: 14 !important;
+  ry: 14 !important;
+}
+
+.arch-diagram .mermaid .cluster-label { font-weight: 600; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.arch-diagram .mermaid .nodeLabel { font-size: 0.8rem; line-height: 1.4; font-weight: 500; }
 .arch-diagram .mermaid .edgeLabel { font-size: 0.72rem; font-weight: 500; }
+.arch-diagram .mermaid .edgePath .path { stroke-width: 1.5px; }
+.arch-diagram .mermaid .flowchart-link { stroke-width: 1.5px; }
+
+/* Architecture section labels */
+.arch-labels {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  padding-right: 3.5rem;
+}
+
+.arch-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+}
+
+.arch-label-bfa {
+  background: rgba(0,173,216,0.1);
+  color: #67e8f9;
+  border: 1px solid rgba(0,173,216,0.2);
+}
+
+.arch-label-agent {
+  background: rgba(167,139,250,0.1);
+  color: #c4b5fd;
+  border: 1px solid rgba(167,139,250,0.2);
+}
 
 /* Zoom button */
 .zoom-btn {
@@ -443,86 +489,89 @@ code {
   z-index: 10;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.45rem 0.85rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: rgba(6,9,15,0.85);
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(71,85,105,0.4);
+  border-radius: 10px;
+  background: rgba(15,23,42,0.8);
   backdrop-filter: blur(8px);
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  font-weight: 500;
+  color: #94a3b8;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: var(--font-sans);
 }
 
 .zoom-btn:hover {
-  color: var(--white);
-  border-color: var(--border-hover);
-  background: rgba(6,9,15,0.95);
+  color: #f1f5f9;
+  border-color: rgba(96,165,250,0.5);
+  background: rgba(30,41,59,0.9);
+  box-shadow: 0 0 12px rgba(96,165,250,0.15);
 }
 
 .zoom-btn svg {
-  width: 14px;
-  height: 14px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
+  width: 16px;
+  height: 16px;
 }
 
-/* Zoom overlay / modal */
+/* Zoom overlay — fullscreen modern */
 .zoom-overlay {
   display: none;
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(0,0,0,0.88);
-  backdrop-filter: blur(8px);
-  cursor: zoom-out;
+  background: rgba(2,6,14,0.96);
   overflow: auto;
-  padding: 2rem;
+  -webkit-overflow-scrolling: touch;
 }
 
-.zoom-overlay.active { display: flex; align-items: center; justify-content: center; }
+.zoom-overlay.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .zoom-overlay .zoom-content {
-  max-width: 98vw;
-  max-height: 96vh;
-  overflow: auto;
-  background: var(--bg-card);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
-  padding: 2.5rem;
+  padding: 3rem;
+  min-width: max(85vw, 1000px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .zoom-overlay .zoom-content svg {
   max-width: none;
-  width: auto;
-  min-width: 900px;
+  width: 100%;
+  min-width: 1000px;
   height: auto;
+  filter: brightness(1.08) contrast(1.02);
 }
 
 .zoom-close {
-  position: absolute;
-  top: 1rem;
+  position: fixed;
+  top: 1.25rem;
   right: 1.5rem;
-  z-index: 2;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.7);
-  color: #fff;
-  font-size: 1.4rem;
+  z-index: 1001;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(30,41,59,0.85);
+  backdrop-filter: blur(12px);
+  color: #94a3b8;
+  font-size: 1.25rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  font-family: var(--font-sans);
 }
 
-.zoom-close:hover { background: rgba(255,255,255,0.15); }
+.zoom-close:hover {
+  background: rgba(51,65,85,0.9);
+  color: #f1f5f9;
+  border-color: rgba(255,255,255,0.2);
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    AI AGENT DEEP DIVE (highlighted section)
