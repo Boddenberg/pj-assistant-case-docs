@@ -398,6 +398,35 @@ code {
   box-shadow: var(--shadow-glow);
 }
 
+/* ── Mermaid diagram overrides ──────────────────────────────────── */
+.arch-diagram .mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  white-space: pre;
+}
+
+.arch-diagram .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mermaid subgraph label styling */
+.arch-diagram .mermaid .cluster-label {
+  font-weight: 600;
+}
+
+.arch-diagram .mermaid .nodeLabel {
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.arch-diagram .mermaid .edgeLabel {
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+/* Legacy diagram classes (kept for backwards compat) */
 .diagram-pre {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 0.72rem;
@@ -408,7 +437,6 @@ code {
   overflow-x: auto;
 }
 
-/* Diagram color classes */
 .d-cyan   { color: #22d3ee; font-weight: 600; }
 .d-green  { color: #4ade80; font-weight: 600; }
 .d-blue   { color: #60a5fa; font-weight: 600; }
@@ -806,6 +834,10 @@ code {
 
   .diagram-pre {
     font-size: 0.55rem;
+  }
+
+  .arch-diagram .mermaid .nodeLabel {
+    font-size: 0.7rem;
   }
 
   .code-block {
