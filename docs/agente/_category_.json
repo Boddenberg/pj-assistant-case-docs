@@ -1,8 +1,0 @@
-{
-  "label": "Agente IA (Python)",
-  "position": 4,
-  "link": {
-    "type": "generated-index",
-    "description": "Documentação do agente inteligente com RAG."
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "label": "Backend (Go)",
-  "position": 3,
-  "link": {
-    "type": "generated-index",
-    "description": "Documentação do serviço BFA em Go."
-  }
-}
