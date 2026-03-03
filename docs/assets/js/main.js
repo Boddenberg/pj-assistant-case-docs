@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════════
    PJ Assistant — Case Técnico
-   Interactions & Scroll Animations
+   Interactions, Scroll Animations & Diagram Zoom
    ═══════════════════════════════════════════════════════════════════ */
 
 (function () {
@@ -51,32 +51,69 @@
         }
       });
     },
-    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.06, rootMargin: '0px 0px -30px 0px' }
   );
 
   document.querySelectorAll(
-    '.card, .criteria-block, .stat-item, .repo-card, .arch-diagram'
+    '.card, .criteria-block, .stat-item, .repo-card, .arch-diagram, .ai-hero-card, .ai-feature'
   ).forEach(function (el) {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
     observer.observe(el);
   });
 
-  // Override fade-in for observed elements
   var style = document.createElement('style');
-  style.textContent =
-    '.fade-in { opacity: 1 !important; transform: translateY(0) !important; }';
+  style.textContent = '.fade-in { opacity: 1 !important; transform: translateY(0) !important; }';
   document.head.appendChild(style);
 
-  // ── Header shrink on scroll ──────────────────────────────────────
+  // ── Header shadow on scroll ──────────────────────────────────────
   var header = document.querySelector('.site-header');
   window.addEventListener('scroll', function () {
-    if (window.scrollY > 60) {
-      header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
-    } else {
-      header.style.boxShadow = 'none';
-    }
+    header.style.boxShadow = window.scrollY > 40
+      ? '0 1px 16px rgba(0,0,0,0.25)'
+      : 'none';
   }, { passive: true });
+
+  // ── Diagram Zoom ─────────────────────────────────────────────────
+  var zoomBtn = document.getElementById('zoom-btn');
+  var zoomOverlay = document.getElementById('zoom-overlay');
+  var zoomClose = document.getElementById('zoom-close');
+  var zoomContent = document.getElementById('zoom-content');
+
+  if (zoomBtn && zoomOverlay) {
+    zoomBtn.addEventListener('click', function () {
+      // Clone the rendered SVG into the overlay
+      var svg = document.querySelector('.arch-diagram .mermaid svg');
+      if (svg) {
+        zoomContent.innerHTML = '';
+        var clone = svg.cloneNode(true);
+        clone.style.maxWidth = 'none';
+        clone.style.width = 'auto';
+        clone.style.minWidth = '1000px';
+        zoomContent.appendChild(clone);
+      }
+      zoomOverlay.classList.add('active');
+      zoomClose.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeZoom() {
+      zoomOverlay.classList.remove('active');
+      zoomClose.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    zoomClose.addEventListener('click', closeZoom);
+    zoomOverlay.addEventListener('click', function (e) {
+      if (e.target === zoomOverlay) closeZoom();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && zoomOverlay.classList.contains('active')) {
+        closeZoom();
+      }
+    });
+  }
 
 })();
