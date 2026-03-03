@@ -104,6 +104,86 @@ html {
   text-align: center;
 }
 
+/* ── Diagram Zoom ───────────────────────────────────────────────── */
+.diagram-zoom {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.diagram-zoom:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 1px var(--ifm-color-primary), 0 4px 24px rgba(236, 112, 0, 0.08);
+}
+
+.diagram-zoom::after {
+  content: 'Click to expand';
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ifm-color-primary);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.diagram-zoom:hover::after {
+  opacity: 0.7;
+}
+
+.diagram-zoom.expanded {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  border-radius: 0;
+  border: none;
+  margin: 0;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(20px);
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.diagram-zoom.expanded::after {
+  content: 'ESC or click to close';
+  opacity: 0.5;
+  color: #fff;
+  top: 16px;
+  right: 24px;
+  font-size: 0.75rem;
+}
+
+.diagram-zoom.expanded .docusaurus-mermaid-container {
+  transform: scale(1.15);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme='dark'] .diagram-zoom {
+  background: rgba(13, 17, 23, 0.5);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme='dark'] .diagram-zoom:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 1px var(--ifm-color-primary), 0 4px 24px rgba(255, 140, 46, 0.1);
+}
+
 /* Table styling */
 table {
   border-radius: 8px;

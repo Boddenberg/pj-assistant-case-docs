@@ -41,6 +41,11 @@ const config: Config = {
     '@docusaurus/theme-live-codeblock',
   ],
 
+  // ── Client Modules ─────────────────────────────────────────────────
+  clientModules: [
+    './src/theme/diagram-zoom.js',
+  ],
+
   // ── Plugins ────────────────────────────────────────────────────────
   plugins: [
     'docusaurus-plugin-sass',
