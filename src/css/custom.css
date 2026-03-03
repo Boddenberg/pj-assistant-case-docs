@@ -1,0 +1,152 @@
+/* ── Tailwind v4 ────────────────────────────────────────────────── */
+@import "tailwindcss";
+
+/* ── Itaú-inspired palette ──────────────────────────────────────── */
+:root {
+  /* Primary — Itaú Orange */
+  --ifm-color-primary: #EC7000;
+  --ifm-color-primary-dark: #D46400;
+  --ifm-color-primary-darker: #C85E00;
+  --ifm-color-primary-darkest: #A44D00;
+  --ifm-color-primary-light: #F47D1A;
+  --ifm-color-primary-lighter: #F68A33;
+  --ifm-color-primary-lightest: #FAA966;
+
+  /* Accent — Deep Blue */
+  --ifm-color-secondary: #003366;
+
+  /* Code */
+  --ifm-code-font-size: 92%;
+  --ifm-code-border-radius: 6px;
+  --docusaurus-highlighted-code-line-bg: rgba(236, 112, 0, 0.12);
+
+  /* Layout */
+  --ifm-container-width-xl: 1440px;
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.7;
+
+  /* Navbar */
+  --ifm-navbar-height: 64px;
+  --ifm-navbar-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #FF8C2E;
+  --ifm-color-primary-dark: #F07800;
+  --ifm-color-primary-darker: #E07000;
+  --ifm-color-primary-darkest: #C06000;
+  --ifm-color-primary-light: #FFA050;
+  --ifm-color-primary-lighter: #FFB070;
+  --ifm-color-primary-lightest: #FFC898;
+
+  --ifm-color-secondary: #66AAFF;
+  --ifm-background-color: #0D1117;
+  --ifm-background-surface-color: #161B22;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 140, 46, 0.15);
+}
+
+/* ── Global Enhancements ────────────────────────────────────────── */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better code blocks */
+.prism-code {
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+
+/* Admonitions */
+.admonition {
+  border-radius: 8px;
+  border-left-width: 4px;
+}
+
+/* Navbar glass effect */
+.navbar {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme='dark'] .navbar {
+  background: rgba(13, 17, 23, 0.88) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* GitHub link icon in navbar */
+.header-github-link::before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23333' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
+[data-theme='dark'] .header-github-link::before {
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
+.header-github-link:hover {
+  opacity: 0.7;
+}
+
+/* Mermaid diagram container */
+.docusaurus-mermaid-container {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+/* Table styling */
+table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table thead tr {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+[data-theme='dark'] table thead tr {
+  background: var(--ifm-color-primary-dark);
+}
+
+/* TOC improvements */
+.table-of-contents {
+  font-size: 0.85rem;
+}
+
+.table-of-contents__link--active {
+  font-weight: 600;
+  color: var(--ifm-color-primary) !important;
+}
+
+/* Docs breadcrumb */
+.breadcrumbs__link {
+  font-size: 0.85rem;
+}
+
+/* Badge / pill utility */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.badge--go { background: #00ADD8; color: white; }
+.badge--python { background: #3776AB; color: white; }
+.badge--react { background: #61DAFB; color: #222; }
+.badge--typescript { background: #3178C6; color: white; }
+.badge--docker { background: #2496ED; color: white; }
+.badge--ai { background: #9B59B6; color: white; }

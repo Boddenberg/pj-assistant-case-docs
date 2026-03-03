@@ -1,45 +1,65 @@
-# pj-assistant-case-docs
+# PJ Assistant — Case Docs
 
-Estrutura inicial de uma página web estática com HTML, CSS e JavaScript.
+📖 **Documentação técnica do case PJ Assistant** — Assistente Bancário Inteligente para Pessoas Jurídicas.
 
-## Estrutura criada
+🌐 **Live:** [https://boddenberg.github.io/pj-assistant-case-docs/](https://boddenberg.github.io/pj-assistant-case-docs/)
 
-```text
-.
-├── assets
-│   ├── css
-│   │   └── style.css
-│   └── js
-│       └── main.js
-├── index.html
-└── README.md
-```
+---
 
-## Como usar
+## 🚀 Stack da Documentação
 
-1. Abra o arquivo `index.html` no navegador.
-2. Ou rode um servidor local simples na pasta do projeto:
+- [Docusaurus 3](https://docusaurus.io/) — Static site generator
+- [Tailwind CSS 4](https://tailwindcss.com/) — Utility-first CSS
+- [Mermaid](https://mermaid.js.org/) — Diagramas como código
+- [TypeScript](https://www.typescriptlang.org/) — Type safety
+- [GitHub Pages](https://pages.github.com/) — Hosting gratuito
+
+## 📦 Desenvolvimento Local
 
 ```bash
-python3 -m http.server 5500
+npm install
+npm start
 ```
 
-Depois acesse: `http://localhost:5500`
+O site abre em `http://localhost:3000/pj-assistant-case-docs/`.
 
-## Publicar no GitHub Pages
+## 🏗️ Build
 
-Este repositório já está preparado para deploy automático com GitHub Actions.
+```bash
+npm run build
+npm run serve
+```
 
-### 1) Ativar o Pages no repositório
+## 📐 Estrutura
 
-No GitHub, abra:
+```
+docs/
+├── intro.md              # Visão geral
+├── arquitetura/           # Decisões arquiteturais
+├── backend/               # Backend Go (BFA)
+├── agente/                # Agente IA (Python)
+├── frontend/              # Frontend React Native
+├── api/                   # API Reference
+├── devops/                # CI/CD e infra
+└── guias/                 # Tutoriais
+blog/                      # Decisões técnicas e aprendizados
+src/
+├── pages/index.tsx        # Landing page custom
+├── css/custom.css         # Theme + Tailwind
+└── components/            # React components
+```
 
-`Settings` → `Pages` → em `Build and deployment`, escolha `Source: GitHub Actions`.
+## 🔧 Features
 
-### 2) Publicar
+- ✅ Mermaid diagrams (C4, flowcharts, sequence)
+- ✅ Tailwind CSS utility classes
+- ✅ Dark/light mode com paleta Itaú
+- ✅ Live code blocks interativos
+- ✅ Image zoom
+- ✅ Syntax highlighting para Go, Python, TypeScript, Docker, SQL, YAML, etc.
+- ✅ GitHub Actions auto-deploy
+- ✅ SEO + sitemap + RSS feed
 
-Faça push na branch `main`. O workflow em `.github/workflows/deploy-pages.yml` fará o deploy automaticamente.
+---
 
-### 3) URL do site
-
-Após o primeiro deploy, a URL ficará disponível na aba `Actions` e também em `Settings` → `Pages`.
+**Case Técnico — Lucas Boddenberg**

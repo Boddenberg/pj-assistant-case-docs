@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <circle cx="60" cy="60" r="56" fill="#EC7000" />
+  <text x="60" y="52" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="32" fill="white">PJ</text>
+  <rect x="38" y="62" width="44" height="28" rx="6" fill="white" opacity="0.95"/>
+  <circle cx="49" cy="74" r="4" fill="#EC7000"/>
+  <circle cx="71" cy="74" r="4" fill="#EC7000"/>
+  <rect x="46" y="82" width="28" height="3" rx="1.5" fill="#EC7000" opacity="0.5"/>
+  <line x1="60" y1="62" x2="60" y2="56" stroke="white" stroke-width="2" stroke-linecap="round"/>
+</svg>
