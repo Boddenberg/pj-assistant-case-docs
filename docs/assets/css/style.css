@@ -947,6 +947,171 @@ code {
 .prod-list li strong { color: var(--text); }
 
 /* ═══════════════════════════════════════════════════════════════════
+   EXPERIENCE SECTION
+   ═══════════════════════════════════════════════════════════════════ */
+.exp-overview {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.exp-overview h3 {
+  font-size: 1.15rem;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.exp-overview p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+.exp-overview p strong {
+  color: var(--text);
+}
+
+/* Experience cards */
+.exp-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+.exp-card h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.exp-card-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.15);
+  color: #60a5fa;
+}
+
+.exp-card-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.exp-card-icon-tools {
+  background: rgba(251,191,36,0.1);
+  border-color: rgba(251,191,36,0.15);
+  color: #fbbf24;
+}
+
+.exp-card-icon-chat {
+  background: rgba(167,139,250,0.1);
+  border-color: rgba(167,139,250,0.15);
+  color: #a78bfa;
+}
+
+/* How to test */
+.exp-howto {
+  margin-top: 2.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+}
+
+.exp-howto h3 {
+  font-size: 1.05rem;
+  color: var(--white);
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.exp-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.exp-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.exp-step-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--gradient-hero);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exp-step strong {
+  display: block;
+  color: var(--white);
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
+}
+
+.exp-step p {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Example prompts */
+.exp-prompts {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.exp-prompts h4 {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.exp-prompts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.exp-prompt {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border-radius: 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-style: italic;
+  transition: all 0.2s;
+}
+
+.exp-prompt:hover {
+  border-color: var(--border-hover);
+  color: var(--text);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════════════════════════════ */
 .site-footer {
@@ -987,6 +1152,7 @@ code {
   .code-block { font-size: 0.7rem; padding: 0.85rem 1rem; }
   .ai-hero-card { padding: 1.5rem; }
   .ai-feature { padding: 1rem; }
+  .exp-steps { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 480px) {
@@ -995,6 +1161,7 @@ code {
   .badge { font-size: 0.65rem; padding: 0.18rem 0.5rem; }
   .card { padding: 1.25rem; }
   .ai-feature-grid { grid-template-columns: 1fr; }
+  .exp-steps { grid-template-columns: 1fr; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════

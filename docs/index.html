@@ -26,7 +26,8 @@
           <li><a href="#arquitetura">Arquitetura</a></li>
           <li><a href="#agente-ia">Agente IA</a></li>
           <li><a href="#criterios">Critérios</a></li>
-          <li><a href="#repositorios">Repositórios</a></li>
+          <li><a href="#experiencia">Experiência</a></li>
+          <li><a href="#repositorios">Repos</a></li>
         </ul>
       </nav>
     </div>
@@ -695,6 +696,95 @@ SENSITIVE_PATTERNS = {
             </ul>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- EXPERIÊNCIA DO CASE -->
+    <section id="experiencia" class="section section-dark">
+      <div class="container">
+        <h2 class="section-title">Experiência para Avaliação</h2>
+        <p class="section-intro">O case foi construído como um aplicativo mobile funcional — uma experiência bancária completa que permite explorar, testar e avaliar a solução de ponta a ponta.</p>
+
+        <div class="exp-overview">
+          <div class="exp-overview-text">
+            <h3>Por que um app funcional?</h3>
+            <p>Em vez de entregar apenas código e documentação, o case entrega uma <strong>experiência interativa</strong>. O avaliador pode baixar o app, navegar como um cliente PJ e testar o chat conversacional com dados reais — tudo alimentado pelo backend Go e pelo agente de IA.</p>
+            <p>A proposta é tornar a avaliação <strong>tangível</strong>: cada botão do app dispara um endpoint real do BFA, cada pergunta no chat passa pelo pipeline completo do agente LangGraph.</p>
+          </div>
+        </div>
+
+        <div class="cards-grid three-col" style="margin-top: 2rem;">
+          <div class="card exp-card">
+            <div class="exp-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+            </div>
+            <h3>App Bancário</h3>
+            <p>Interface mobile com navegação real: PIX, contratação de cartão de crédito, extrato, fatura, análise financeira e PIX via cartão de crédito.</p>
+          </div>
+          <div class="card exp-card">
+            <div class="exp-card-icon exp-card-icon-tools">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.7-3.7a8 8 0 0 1-11 11l-7.1 7.1a2 2 0 0 1-2.8-2.8l7.1-7.1A8 8 0 0 1 18.4 2.6l-3.7 3.7z"/></svg>
+            </div>
+            <h3>DevTools Embutidas</h3>
+            <p>Ferramentas de simulação dentro do app: adicionar saldo, ajustar limite de crédito, gerar transações e compras no cartão — monte cenários em segundos.</p>
+          </div>
+          <div class="card exp-card">
+            <div class="exp-card-icon exp-card-icon-chat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>Chat Conversacional</h3>
+            <p>Pergunte sobre transações, gastos e comportamento financeiro. O agente de IA analisa dados reais e responde com contexto. Inclui jornada de abertura de conta pelo chat.</p>
+          </div>
+        </div>
+
+        <!-- COMO TESTAR -->
+        <div class="exp-howto">
+          <h3>Como testar</h3>
+          <div class="exp-steps">
+            <div class="exp-step">
+              <span class="exp-step-num">1</span>
+              <div>
+                <strong>Abra o app</strong>
+                <p>Baixe ou acesse o aplicativo mobile</p>
+              </div>
+            </div>
+            <div class="exp-step">
+              <span class="exp-step-num">2</span>
+              <div>
+                <strong>Monte um cenário com DevTools</strong>
+                <p>Adicione saldo, gere transações e compras no cartão para simular um cliente ativo</p>
+              </div>
+            </div>
+            <div class="exp-step">
+              <span class="exp-step-num">3</span>
+              <div>
+                <strong>Explore o app</strong>
+                <p>Navegue pelo extrato, fatura, PIX e contratação de cartão</p>
+              </div>
+            </div>
+            <div class="exp-step">
+              <span class="exp-step-num">4</span>
+              <div>
+                <strong>Converse com o assistente</strong>
+                <p>Pergunte sobre seus gastos, peça análises financeiras ou inicie a abertura de conta</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXEMPLOS DE PERGUNTAS -->
+        <div class="exp-prompts">
+          <h4>Exemplos de perguntas para o chat</h4>
+          <div class="exp-prompts-grid">
+            <span class="exp-prompt">&ldquo;Quais foram minhas transações nos últimos 2 meses?&rdquo;</span>
+            <span class="exp-prompt">&ldquo;Quanto eu gastei nesse período?&rdquo;</span>
+            <span class="exp-prompt">&ldquo;Me dê uma dica financeira&rdquo;</span>
+            <span class="exp-prompt">&ldquo;Quero abrir uma conta PJ&rdquo;</span>
+            <span class="exp-prompt">&ldquo;Quanto entrou na minha conta?&rdquo;</span>
+            <span class="exp-prompt">&ldquo;Resuma minha fatura do cartão&rdquo;</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
