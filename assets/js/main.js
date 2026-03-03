@@ -81,30 +81,59 @@
   var zoomClose = document.getElementById('zoom-close');
   var zoomContent = document.getElementById('zoom-content');
 
-  if (zoomBtn && zoomOverlay) {
-    zoomBtn.addEventListener('click', function () {
-      // Clone the rendered SVG into the overlay
-      var svg = document.querySelector('.arch-diagram .mermaid svg');
-      if (svg) {
-        zoomContent.innerHTML = '';
-        var clone = svg.cloneNode(true);
-        clone.style.maxWidth = 'none';
-        clone.style.width = 'auto';
-        clone.style.minWidth = '1000px';
-        zoomContent.appendChild(clone);
-      }
+  if (zoomBtn && zoomOverlay && zoomContent) {
+
+    // Find the Mermaid SVG (may take time to render)
+    function findSvg() {
+      return document.querySelector('.arch-diagram .mermaid svg')
+          || document.querySelector('.arch-diagram svg');
+    }
+
+    function showZoom(svg) {
+      zoomContent.innerHTML = '';
+      var clone = svg.cloneNode(true);
+      clone.removeAttribute('height');
+      clone.style.maxWidth = 'none';
+      clone.style.width = 'auto';
+      clone.style.minWidth = '1200px';
+      clone.style.height = 'auto';
+      zoomContent.appendChild(clone);
       zoomOverlay.classList.add('active');
-      zoomClose.classList.add('active');
       document.body.style.overflow = 'hidden';
-    });
+    }
 
     function closeZoom() {
       zoomOverlay.classList.remove('active');
-      zoomClose.classList.remove('active');
       document.body.style.overflow = '';
     }
 
-    zoomClose.addEventListener('click', closeZoom);
+    zoomBtn.addEventListener('click', function () {
+      var svg = findSvg();
+      if (svg) {
+        showZoom(svg);
+      } else {
+        // Mermaid hasn't rendered yet — retry after a delay
+        var attempts = 0;
+        var retryInterval = setInterval(function () {
+          attempts++;
+          svg = findSvg();
+          if (svg) {
+            clearInterval(retryInterval);
+            showZoom(svg);
+          } else if (attempts >= 5) {
+            clearInterval(retryInterval);
+          }
+        }, 400);
+      }
+    });
+
+    if (zoomClose) {
+      zoomClose.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeZoom();
+      });
+    }
+
     zoomOverlay.addEventListener('click', function (e) {
       if (e.target === zoomOverlay) closeZoom();
     });

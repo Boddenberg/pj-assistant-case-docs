@@ -93,7 +93,7 @@
             <span class="stat-label">Tools do Agente</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number">141</span>
+            <span class="stat-number">150+</span>
             <span class="stat-label">Testes</span>
           </div>
           <div class="stat-item">
@@ -181,11 +181,7 @@ flowchart TD
           </div>
         </div>
 
-        <!-- Zoom overlay -->
-        <div class="zoom-overlay" id="zoom-overlay">
-          <div class="zoom-content" id="zoom-content"></div>
-        </div>
-        <button class="zoom-close" id="zoom-close" title="Fechar">&times;</button>
+
 
         <div class="cards-grid two-col" style="margin-top: 2.5rem;">
           <div class="card">
@@ -267,6 +263,11 @@ flowchart TD
             <span class="ai-feature-label">Prompt Engineering</span>
             <h4>System Prompt v9</h4>
             <p>Versionamento semântico em <code>prompts.py</code>. GPT-4o-mini com temperature 0.1. Instruções anti-hallucination: "NUNCA invente dados". Guardrail: apenas assuntos bancários PJ.</p>
+          </div>
+          <div class="ai-feature">
+            <span class="ai-feature-label">Evaluation</span>
+            <h4>LLM-as-Judge</h4>
+            <p>GPT-4 avalia conversas em 9 critérios ponderados (correctness 20%, faithfulness 20%, safety 15%). Endpoint <code>POST /v1/evaluate</code>. Threshold 7.0 para PASS. Retorna JSON com scores, reasoning e improvements acionáveis.</p>
           </div>
         </div>
 
@@ -606,7 +607,7 @@ SENSITIVE_PATTERNS = {
                 <tr><td>Migrações SQL (Supabase)</td><td><span class="check">&#10003;</span></td><td>Tabelas, RLS, functions (match_documents, validate_barcode, spending_summary).</td></tr>
                 <tr><td>Deploy contínuo</td><td><span class="check">&#10003;</span></td><td>Railway auto-deploy, healthcheck, restart on failure. URLs de produção ativas.</td></tr>
                 <tr class="row-pending"><td>Multiagente</td><td><span class="pending">&#8594;</span></td><td>Estrutura permite sub-agentes especializados (credit, compliance).</td></tr>
-                <tr class="row-pending"><td>LLM-as-judge</td><td><span class="pending">&#8594;</span></td><td>Próximo passo com LangFuse Evaluations.</td></tr>
+                <tr><td>LLM-as-Judge (Evaluation)</td><td><span class="check">&#10003;</span></td><td><code>ConversationEvaluator</code> com GPT-4 em 9 critérios ponderados. Endpoint <code>POST /v1/evaluate</code>. Testes unitários completos em <code>test_evaluation.py</code>.</td></tr>
                 <tr class="row-pending"><td>Reranking real</td><td><span class="pending">&#8594;</span></td><td>Threshold implementado. Cross-encoder como evolução.</td></tr>
               </tbody>
             </table>
@@ -703,6 +704,12 @@ SENSITIVE_PATTERNS = {
       <p class="footer-sub">Go + Python + LangGraph + RAG</p>
     </div>
   </footer>
+
+  <!-- ZOOM OVERLAY (direct child of body for reliable position:fixed) -->
+  <div class="zoom-overlay" id="zoom-overlay">
+    <button class="zoom-close" id="zoom-close" title="Fechar">&times;</button>
+    <div class="zoom-content" id="zoom-content"></div>
+  </div>
 
   <script src="assets/js/main.js"></script>
   <script>
