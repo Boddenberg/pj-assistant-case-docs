@@ -1112,6 +1112,136 @@ code {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
+   SETUP CARDS
+   ═══════════════════════════════════════════════════════════════════ */
+.setup-card h3 { margin-bottom: 1rem; }
+
+.setup-prereq {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.setup-list {
+  list-style: none;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.setup-list li {
+  padding: 0.25rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.setup-list li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.setup-note {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.code-block-sm {
+  font-size: 0.75rem !important;
+  padding: 0.65rem 0.85rem !important;
+  margin: 0.5rem 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   GLOSSARY
+   ═══════════════════════════════════════════════════════════════════ */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.glossary-group {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+}
+
+.glossary-group-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.glossary-dl {
+  display: grid;
+  gap: 0;
+}
+
+.glossary-dl dt {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--white);
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+}
+
+.glossary-dl dd {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0.15rem 0 0 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MISC ADDITIONS
+   ═══════════════════════════════════════════════════════════════════ */
+.card-note {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+}
+
+.future-category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-ai);
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+
+.future-category:first-of-type {
+  margin-top: 0;
+}
+
+.four-col {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.workflow-diagram {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 1rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════════════════════════════ */
 .site-footer {
@@ -1153,6 +1283,8 @@ code {
   .ai-hero-card { padding: 1.5rem; }
   .ai-feature { padding: 1rem; }
   .exp-steps { grid-template-columns: 1fr 1fr; }
+  .glossary-grid { grid-template-columns: 1fr; }
+  .four-col { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 480px) {
@@ -1162,6 +1294,7 @@ code {
   .card { padding: 1.25rem; }
   .ai-feature-grid { grid-template-columns: 1fr; }
   .exp-steps { grid-template-columns: 1fr; }
+  .four-col { grid-template-columns: 1fr; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════
